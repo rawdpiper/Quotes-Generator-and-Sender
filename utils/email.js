@@ -33,4 +33,4 @@ const sendCount = async (count) => {
 module.exports = {
   sendEmail,
   sendCount,
-}
+};
