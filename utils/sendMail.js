@@ -17,7 +17,3 @@ async function sendMail() {
 }
 
 module.exports = sendMail;
-
-(async () => {
-  await sendMail();
-})()
