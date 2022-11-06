@@ -1,5 +1,4 @@
 const transport = require("./transport.js");
-const { htmlToText } = require("html-to-text");
 
 const sendEmail = async (html) => {
   try {
@@ -16,13 +15,13 @@ const sendEmail = async (html) => {
   }
 };
 
-const sendCount = async (count) => {
+const sendQuote = async (quote) => {
   try {
     const result = await transport.sendMail({
       from: process.env.EMAIL_SENDER,
       to: process.env.COUNT_RECEIVER,
-      subject: "Daily Count",
-      text: `Total number of quotes sent: ${count}`,
+      subject: "Quote Sent",
+      text: `Quote: ${quote}`,
     });
     return result;
   } catch (error) {
@@ -32,5 +31,5 @@ const sendCount = async (count) => {
 
 module.exports = {
   sendEmail,
-  sendCount,
+  sendQuote,
 };
