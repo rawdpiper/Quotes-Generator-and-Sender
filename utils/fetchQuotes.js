@@ -1,10 +1,19 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
 const email = require("./email");
+const Redis = require("ioredis");
 
 dotenv.config();
+const redis = new Redis(process.env.REDIS_URL);
 
-let count = 0;
+redis.get("count", async (err, result) => {
+  if (err) {
+    await redis.set("count", 1);
+    console.log("Count key set to 1");
+  } else {
+    console.log(`Count key exists: ${result}`);
+  }
+});
 
 async function fetchQuote() {
   try {
@@ -17,7 +26,8 @@ async function fetchQuote() {
       },
     });
     await email.sendCount(count);
-    count = count + 1;
+    count++;
+    await redis.set("count", count);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -25,7 +35,3 @@ async function fetchQuote() {
 }
 
 module.exports = fetchQuote;
-
-// (async () => {
-//   await fetchQuotes();
-// })();
