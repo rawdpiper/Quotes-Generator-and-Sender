@@ -12,8 +12,8 @@ const redis = new Redis(process.env.REDIS_URL, {
 
 redis.get("count", async (err, result) => {
   if (result == null) {
-    await redis.set("count", 1);
-    console.log("Count key initialized and set to 1");
+    await redis.set("count", 0);
+    console.log("Count key initialized and set to 0");
   } else {
     console.log(`Count key exists: ${result}`);
   }
