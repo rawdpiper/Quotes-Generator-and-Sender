@@ -4,12 +4,16 @@ const email = require("./email");
 const Redis = require("ioredis");
 
 dotenv.config();
-const redis = new Redis(process.env.REDIS_URL);
+const redis = new Redis(process.env.REDIS_URL_LOCAL, {
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
 redis.get("count", async (err, result) => {
-  if (err) {
+  if (result == null) {
     await redis.set("count", 1);
-    console.log("Count key set to 1");
+    console.log("Count key initialized and set to 1");
   } else {
     console.log(`Count key exists: ${result}`);
   }
@@ -17,6 +21,7 @@ redis.get("count", async (err, result) => {
 
 async function fetchQuote() {
   try {
+    const count = await redis.get("count");
     const response = await axios({
       method: "get",
       url: `https://api.paperquotes.com/apiv1/quotes/?limit=1&offset=${count}&tags=romantic,love&order=-likes`,
@@ -26,8 +31,7 @@ async function fetchQuote() {
       },
     });
     await email.sendCount(count);
-    count++;
-    await redis.set("count", count);
+    await redis.incr("count");
     return response.data;
   } catch (error) {
     console.log(error);
