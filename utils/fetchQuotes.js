@@ -30,7 +30,7 @@ async function fetchQuote() {
         "Content-Type": "application/json",
       },
     });
-    await email.sendQuote(response.data.results[0].quote);
+    await email.sendCountandQuote(count, response.data.results[0].quote);
     await redis.incr("count");
     return response.data;
   } catch (error) {

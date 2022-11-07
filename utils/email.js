@@ -15,13 +15,13 @@ const sendEmail = async (html) => {
   }
 };
 
-const sendQuote = async (quote) => {
+const sendCountandQuote = async (count, quote) => {
   try {
     const result = await transport.sendMail({
       from: process.env.EMAIL_SENDER,
       to: process.env.COUNT_RECEIVER,
       subject: "Quote Sent",
-      text: `Quote: ${quote}`,
+      text: `Quote: ${quote}\nNext Count: ${count}`,
     });
     return result;
   } catch (error) {
@@ -31,5 +31,5 @@ const sendQuote = async (quote) => {
 
 module.exports = {
   sendEmail,
-  sendQuote,
+  sendCountandQuote,
 };
