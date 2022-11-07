@@ -1,6 +1,5 @@
 const axios = require("axios");
 const dotenv = require("dotenv");
-const email = require("./email");
 const Redis = require("ioredis");
 
 dotenv.config();
@@ -30,9 +29,9 @@ async function fetchQuote() {
         "Content-Type": "application/json",
       },
     });
-    await email.sendCountandQuote(count, response.data.results[0].quote);
+    const data = response.data;
     await redis.incr("count");
-    return response.data;
+    return { data, count };
   } catch (error) {
     console.log(error);
   }

@@ -20,8 +20,8 @@ const sendCountandQuote = async (count, quote) => {
     const result = await transport.sendMail({
       from: process.env.EMAIL_SENDER,
       to: process.env.COUNT_RECEIVER,
-      subject: "Quote Sent",
-      text: `Quote: ${quote}\nNext Count: ${count}`,
+      subject: "Quote Sent to Koche",
+      text: `Quote: ${quote}\n\nNext Offset: ${count}`,
     });
     return result;
   } catch (error) {
