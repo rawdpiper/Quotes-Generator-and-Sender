@@ -16,6 +16,7 @@ async function incrementOffsetKey(req, res) {
     res.status(200).json({
       status: "success",
       message: "Offset key incremented successfully",
+      data: key
     });
   } catch (error) {
     console.log(error);
