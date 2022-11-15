@@ -16,7 +16,7 @@ async function viewNextQuote(req, res) {
     const response = await helperFunctions.APIconnect(offset);
     res.status(200).json({
       status: "success",
-      message: "student exam updated successfully",
+      message: "Next Quote fetched successfully",
       data: response.data,
     });
   } catch (error) {
