@@ -5,6 +5,7 @@ const path = require("path");
 
 const viewNextQuoteRoute = require('./routes/viewNextQuote.routes');
 const incrementOffsetKeyRoute = require('./routes/incrementOffsetKey.routes');
+const decrementOffsetKeyRoute = require('./routes/decrementOffsetKey.routes');
 
 dotenv.config();
 

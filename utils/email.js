@@ -15,13 +15,13 @@ const sendEmail = async (html) => {
   }
 };
 
-const sendCountandQuote = async (count, quote) => {
+const sendCountandQuote = async (offset, quote) => {
   try {
     const result = await transport.sendMail({
       from: process.env.EMAIL_SENDER,
       to: process.env.COUNT_RECEIVER,
       subject: "Quote Sent to Koche",
-      text: `Quote: ${quote}\n\nNext Offset: ${count}`,
+      text: `Quote: ${quote}\n\nNext Offset: ${offset}`,
     });
     return result;
   } catch (error) {
