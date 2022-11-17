@@ -15,6 +15,7 @@ require("./cronjobs/sendMail.cronjob");
 
 app.use('/api', viewNextQuoteRoute);
 app.use('/api', incrementOffsetKeyRoute);
+app.use('/api', decrementOffsetKeyRoute);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, async () => {
