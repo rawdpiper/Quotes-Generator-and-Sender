@@ -25,7 +25,8 @@ async function fetchQuote() {
     const response = await helperFunctions.APIconnect(offset);
     const data = response.data;
     await redis.incr("offset");
-    return { data, offset };
+    const nextOffset = await redis.get("offset");
+    return { data, nextOffset };
   } catch (error) {
     console.log(error);
   }
