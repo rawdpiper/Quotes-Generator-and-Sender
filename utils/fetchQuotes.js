@@ -3,10 +3,10 @@ const Redis = require("ioredis");
 const helperFunctions = require("../helpers/helperFunctions");
 
 dotenv.config();
-const redis = new Redis(process.env.REDIS_URL_LOCAL, {
-  // tls: {
-  //   rejectUnauthorized: false,
-  // },
+const redis = new Redis(process.env.REDIS_URL, {
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
 redis.get("offset", async (err, result) => {
