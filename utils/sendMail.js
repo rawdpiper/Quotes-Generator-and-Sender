@@ -15,7 +15,11 @@ async function sendMail() {
     );
     await email.sendEmail(html);
     console.log("Mail Sent to Koche");
-    await email.sendCountandQuote(nextOffset, data.results[0].quote);
+    await email.sendCountandQuote(
+      nextOffset,
+      data.results[0].quote,
+      currentImage
+    );
     console.log("Verification Mail Sent");
   } catch (error) {
     console.log(error);
